@@ -47,8 +47,12 @@ public interface DiscoveryClient extends Ordered {
 	 */
 	List<String> getServices();
 
+	/**
+	 * Default implementation for getting order of discovery clients.
+	 * @return order
+	 */
 	@Override
 	default int getOrder() {
-		return Ordered.LOWEST_PRECEDENCE;
+		return 0;
 	}
 }
