@@ -30,31 +30,31 @@ import static org.assertj.core.api.BDDAssertions.then;
  * @author Dave Syer
  *
  */
-public class InetUtilsTests {
+class InetUtilsTests {
 
 	@Test
-	public void testGetFirstNonLoopbackHostInfo() {
+	void testGetFirstNonLoopbackHostInfo() {
 		try (InetUtils utils = new InetUtils(new InetUtilsProperties())) {
 			then(utils.findFirstNonLoopbackHostInfo()).isNotNull();
 		}
 	}
 
 	@Test
-	public void testGetFirstNonLoopbackAddress() {
+	void testGetFirstNonLoopbackAddress() {
 		try (InetUtils utils = new InetUtils(new InetUtilsProperties())) {
 			then(utils.findFirstNonLoopbackAddress()).isNotNull();
 		}
 	}
 
 	@Test
-	public void testConvert() throws Exception {
+	void testConvert() throws Exception {
 		try (InetUtils utils = new InetUtils(new InetUtilsProperties())) {
 			then(utils.convertAddress(InetAddress.getByName("localhost"))).isNotNull();
 		}
 	}
 
 	@Test
-	public void testHostInfo() {
+	void testHostInfo() {
 		try (InetUtils utils = new InetUtils(new InetUtilsProperties())) {
 			HostInfo info = utils.findFirstNonLoopbackHostInfo();
 			then(info.getIpAddressAsInt()).isNotNull();
@@ -62,7 +62,7 @@ public class InetUtilsTests {
 	}
 
 	@Test
-	public void testIgnoreInterface() {
+	void testIgnoreInterface() {
 		InetUtilsProperties properties = new InetUtilsProperties();
 		// These interfaces are not usable for "outside" communication, so they're
 		// probably not a good fit for the simple strategy of getting the first "usable"
@@ -78,14 +78,14 @@ public class InetUtilsTests {
 	}
 
 	@Test
-	public void testDefaultIgnoreInterface() {
+	void testDefaultIgnoreInterface() {
 		try (InetUtils inetUtils = new InetUtils(new InetUtilsProperties())) {
 			then(inetUtils.ignoreInterface("docker0")).as("docker0 ignored").isFalse();
 		}
 	}
 
 	@Test
-	public void testSiteLocalAddresses() throws Exception {
+	void testSiteLocalAddresses() throws Exception {
 		InetUtilsProperties properties = new InetUtilsProperties();
 		properties.setUseOnlySiteLocalInterfaces(true);
 
@@ -96,7 +96,7 @@ public class InetUtilsTests {
 	}
 
 	@Test
-	public void testPreferredNetworksRegex() throws Exception {
+	void testPreferredNetworksRegex() throws Exception {
 		InetUtilsProperties properties = new InetUtilsProperties();
 		properties.setPreferredNetworks(Arrays.asList("192.168.*", "10.0.*"));
 
@@ -109,7 +109,7 @@ public class InetUtilsTests {
 	}
 
 	@Test
-	public void testPreferredNetworksSimple() throws Exception {
+	void testPreferredNetworksSimple() throws Exception {
 		InetUtilsProperties properties = new InetUtilsProperties();
 		properties.setPreferredNetworks(Arrays.asList("192", "10.0"));
 
@@ -122,7 +122,7 @@ public class InetUtilsTests {
 	}
 
 	@Test
-	public void testPreferredNetworksListIsEmpty() throws Exception {
+	void testPreferredNetworksListIsEmpty() throws Exception {
 		InetUtilsProperties properties = new InetUtilsProperties();
 		properties.setPreferredNetworks(Collections.emptyList());
 		try (InetUtils utils = new InetUtils(properties)) {

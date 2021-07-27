@@ -33,32 +33,32 @@ import static org.mockito.Mockito.mock;
  * @author Ryan Baxter
  */
 @ExtendWith(MockitoExtension.class)
-public class LoadBalancedRetryContextTest {
+class LoadBalancedRetryContextTest {
 
 	private RetryContext context;
 
 	private HttpRequest request;
 
 	@BeforeEach
-	public void setUp() throws Exception {
+	void setUp() throws Exception {
 		this.context = mock(RetryContext.class);
 		this.request = mock(HttpRequest.class);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception {
+	void tearDown() throws Exception {
 		this.context = null;
 		this.request = null;
 	}
 
 	@Test
-	public void getRequest() throws Exception {
+	void getRequest() throws Exception {
 		LoadBalancedRetryContext lbContext = new LoadBalancedRetryContext(this.context, this.request);
 		then(lbContext.getRequest()).isEqualTo(this.request);
 	}
 
 	@Test
-	public void setRequest() throws Exception {
+	void setRequest() throws Exception {
 		LoadBalancedRetryContext lbContext = new LoadBalancedRetryContext(this.context, this.request);
 		HttpRequest newRequest = mock(HttpRequest.class);
 		lbContext.setRequest(newRequest);
@@ -66,7 +66,7 @@ public class LoadBalancedRetryContextTest {
 	}
 
 	@Test
-	public void getServiceInstance() throws Exception {
+	void getServiceInstance() throws Exception {
 		LoadBalancedRetryContext lbContext = new LoadBalancedRetryContext(this.context, this.request);
 		ServiceInstance serviceInstance = mock(ServiceInstance.class);
 		lbContext.setServiceInstance(serviceInstance);
